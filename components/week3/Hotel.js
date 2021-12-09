@@ -26,11 +26,11 @@ export default function Hotel() {
       </View>
       <View style={{ flexDirection: "row",justifyContent:"space-between" ,marginTop:10 }}>
         <View style={{ flexDirection: "row" }}>
-          <FontAwesome name="star" size={5} color="orange" />
-          <FontAwesome name="star" size={5} color="orange" />
-          <FontAwesome name="star" size={5} color="orange" />
-          <FontAwesome name="star" size={5} color="orange" />
-          <FontAwesome name="star-half" size={5} color="orange" />
+          <FontAwesome name="star" size={32} color="orange" />
+          <FontAwesome name="star" size={32} color="orange" />
+          <FontAwesome name="star" size={32} color="orange" />
+          <FontAwesome name="star" size={32} color="orange" />
+          <FontAwesome name="star-half" size={32} color="orange" />
         </View>
         <View >
           <Text style={{color:"gray" ,fontSize:20}}>100 Reviews</Text>
