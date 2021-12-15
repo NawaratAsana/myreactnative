@@ -2,6 +2,8 @@ import React from "react";
 import { View, StyleSheet, ProgressBarAndroid, Text } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { color } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
+import ProgressBar from 'react-native-progress/Bar';
+import * as Progress from 'react-native-progress';
 const App = () => {
   return (
     <View style={{flex:1, flexDirection:'row',marginTop:30,justifyContent: "space-between",}}>
@@ -27,12 +29,7 @@ const App = () => {
           </View>
           <View>
             <View style={styles.example}>
-              <ProgressBarAndroid
-                styleAttr="Horizontal"
-                indeterminate={false}
-                progress={0.1}
-                color={"#FF6347"}
-              />
+            <Progress.Bar progress={0.1}  color="#FF6347"/>
             </View>
           </View>
         </View>
@@ -52,12 +49,7 @@ const App = () => {
           </View>
           <View>
             <View style={styles.example}>
-              <ProgressBarAndroid
-                styleAttr="Horizontal"
-                indeterminate={false}
-                progress={0.1}
-                color={"#FF6347"}
-              />
+            <Progress.Bar progress={0.1}  color="#FF6347"/>
             </View>
           </View>
         </View>
@@ -76,12 +68,7 @@ const App = () => {
           </View>
           <View>
             <View style={styles.example}>
-              <ProgressBarAndroid
-                styleAttr="Horizontal"
-                indeterminate={false}
-                progress={0.4}
-                color={"#FF6347"}
-              />
+            <Progress.Bar progress={0.4} color="#FF6347" />
             </View>
           </View>
         </View>
@@ -99,12 +86,7 @@ const App = () => {
           </View>
           <View>
             <View style={styles.example}>
-              <ProgressBarAndroid
-                styleAttr="Horizontal"
-                indeterminate={false}
-                progress={0.5}
-                color={"#FF6347"}
-              />
+            <Progress.Bar progress={0.5}  color="#FF6347"/>
             </View>
           </View>
         </View>
@@ -120,12 +102,7 @@ const App = () => {
           </View>
           <View>
             <View style={styles.example}>
-              <ProgressBarAndroid
-                styleAttr="Horizontal"
-                indeterminate={false}
-                progress={0.2}
-                color={"#FF6347"}
-              />
+            <Progress.Bar progress={0.2} color="#FF6347" />
             </View>
           </View>
           
@@ -141,7 +118,6 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-   
     alignItems: "flex-end",
     marginTop:5,
     marginRight:20,
