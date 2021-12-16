@@ -102,7 +102,7 @@ const App = () => {
           </View>
           <View>
             <View style={styles.example}>
-            <Progress.Bar progress={0.2} color="#FF6347" />
+            <Progress.Bar progress={0.2}  color="#FF6347" />
             </View>
           </View>
           
