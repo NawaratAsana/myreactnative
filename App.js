@@ -19,13 +19,15 @@ import Resort from './screens/week4/Resort';
 import Challenge1 from './components/week4/Challenge1';
 import Review from './screens/week4/Review';
 import Health from './screens/week5/Health';
+import Home from './screens/week6/Home';
 
 export default function App() {
   return (
     // <Travel/>
     // <Resort/>
     // <Review/>
-    <Health />
+    // <Health />
+    <Home />
 
   );
 }
