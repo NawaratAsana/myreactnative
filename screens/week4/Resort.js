@@ -14,6 +14,7 @@ import Section8 from '../../components/week4/Section8';
 
 
 export default function Resort() {
+    
     return (  
         <ScrollView>      
         <View style={{ flex: 1, flexDirection: 'column' ,marginTop:25}}>
