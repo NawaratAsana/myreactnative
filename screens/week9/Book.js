@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import BookStorage from "../../storages/BookStorage";
+import BookLaravel from "../../services/BookLaravel";
 export default function Book() {
-  const navigation = useNavigation();
-
   const [products, setProducts] = useState([
     {
       id: 1,
@@ -29,31 +29,37 @@ export default function Book() {
         "https://raw.githubusercontent.com/arc6828/myreactnative/master/assets/week9/book-3.jpg",
     },
   ]);
-  const readProducts = async () => {
-    try {
-      setRefresh(true);
-      const string_value = await AsyncStorage.getItem("@products");
-      let products = string_value != null ? JSON.parse(string_value) : [];
-      setProducts(products);
-      setRefresh(false);
-    } catch (e) {
-      // error reading value
-    }
+  const navigation = useNavigation();
+  const loadBooks = async () => {
+    setRefresh(true);
+    // let products = await BookStorage.readItems();
+    let products = await BookLaravel.getItems();
+
+    setProducts(products);
+    setRefresh(false);
   };
-  useEffect(() => { readProducts(); }, []);
-  const [refresh, setRefresh] = useState(false)
+
+  useEffect(() => {
+    // WHEN MOUNT AND UPDATE
+    const unsubscribe = navigation.addListener("focus", () => {
+        loadBooks();
+    });
+    // WHEN UNMOUNT
+    return unsubscribe;
+  }, [navigation]);
+
+  const [refresh, setRefresh] = useState(false);
 
   return (
     <View style={{ flex: 1 }}>
       <FlatList
         data={products}
+        refreshing={refresh}
+        onRefresh={() => { loadBooks(); }}
         numColumns={2}
         keyExtractor={(item) => item.id.toString()}
-        refreshing={refresh}
-        onRefresh={() => { readProducts(); }}
         renderItem={({ item, index }) => {
           return (
-            // <Text>{item.name}</Text>
             <TouchableOpacity
               onPress={() => {
                 navigation.navigate("BookDetail", { item: item });
@@ -96,7 +102,6 @@ export default function Book() {
           );
         }}
       />
-
       <TouchableOpacity
         onPress={() => {
           navigation.navigate("BookForm", { item: null });
@@ -106,8 +111,8 @@ export default function Book() {
           flex: 1,
           alignItems: "center",
           justifyContent: "center",
-          width: 60,
-          height: 60,
+          width: 80,
+          height: 80,
           borderRadius: 40,
           position: "absolute",
           right: 30,
