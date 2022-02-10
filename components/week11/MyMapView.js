@@ -45,14 +45,14 @@ export default function MyMapView(props) {
               //SET LOCATION
               props.setLocation(new_location);  
                 //SEND TO SERVER
-            //if (props.recordLocation) {
+            if (props.recordLocation) {
                 console.log("SEND TO SERVER");
                 LocationLaravel.storeItem({
                   user_id: "Nawarat Asana",
                   latitude: event.nativeEvent.coordinate.latitude,
                   longitude: event.nativeEvent.coordinate.longitude,
                 });
-              //}
+              }
         
             }
         }}
