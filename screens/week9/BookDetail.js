@@ -1,13 +1,17 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import { Alert, Image, Text, TouchableOpacity, View } from "react-native";
+import { Alert, Image, Modal, Text, TouchableOpacity, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import BookStorage from "../../storages/BookStorage";
 import BookLaravel from "../../services/BookLaravel";
+import File from "../../helpers/File";
+import ImageViewer from "react-native-image-zoom-viewer";
 export default function BookDetail() {
   const route = useRoute();
   const { item } = route.params;
   const [book, setBook ] = useState(item);
+  const [modalVisible, setModalVisible] = useState(false);
+
   const confirmDelete = () => {
     return Alert.alert("ยืนยันการลบ?", "คุณแน่ใจหรือไม่ว่าจะลบรายการนี้?", [
       { text: "ยกเลิก" },
@@ -62,12 +66,11 @@ export default function BookDetail() {
 
   return (
     <View style={{ backgroundColor: "white", padding: 20, flex: 1 }}>
-      <View style={{ flexDirection: "row" }}>
-        <Image
-          style={{ flex: 1, resizeMode: "contain", aspectRatio: 1 / 1 }}
-          source={{ uri: book.image }}
-        />
-      </View>
+      <TouchableOpacity onPress={() => {setModalVisible(true);}} >
+                <View style={{ flexDirection: "row" }}>
+                    <Image style={{ flex: 1, resizeMode: "contain", aspectRatio: 1 / 1 }} source={{ uri: book.image }} />
+                </View>
+            </TouchableOpacity>
       <Text style={{ fontSize: 20, height: 70, marginVertical: 10 }}>
         {" "}
         {book.name}{" "}
@@ -76,6 +79,14 @@ export default function BookDetail() {
         <Text style={{ color: "green", fontSize: 20 }}>{book.price}</Text>
         <Text style={{ paddingTop: 6 }}> บาท</Text>
       </View>
+      <Modal visible={modalVisible} transparent={true} onRequestClose={() => { setModalVisible(false); }} >
+                <ImageViewer imageUrls={[{ url: book.image, props: { } }]}
+                    enableSwipeDown={true}
+                    onCancel={()=>{ console.log("SwipeDown"); setModalVisible(false); }}
+                    //onSave={(uri)=>{ File.download(uri); }}
+                    />
+            </Modal>
+
     </View>
   );
 }
