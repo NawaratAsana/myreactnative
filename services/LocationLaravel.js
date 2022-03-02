@@ -1,7 +1,11 @@
 // const url_endpoint = "http://localhost/mylaravel8/public/api/location";
-const url_endpoint = "http://192.168.1.102/mylaravel8/public/api/location";
+//const url_endpoint = "http://192.168.1.102/mylaravel8/public/api/location";
+ 
+import { APP_URL } from "@env";
+const url_endpoint = APP_URL+"/api/location";
 
 const getItems = async () => {
+  console.log(url_endpoint,APP_URL);
   try {
     let response = await fetch(url_endpoint);
     let items = await response.json();
